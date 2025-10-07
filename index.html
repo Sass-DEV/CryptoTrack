@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoTrack - Portfolio Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 min-h-screen text-white">
+    <!-- Header -->
+    <header class="bg-black/30 backdrop-blur-md border-b border-white/10">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chart-line text-purple-400 text-2xl"></i>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    CryptoTrack
+                </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-gray-300">Total Portfolio Value:</span>
+                <span id="totalValue" class="text-xl font-bold text-green-400">$0.00</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Add Asset Section -->
+        <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-8 border border-white/20">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-plus-circle mr-2 text-purple-400"></i>
+                Add Cryptocurrency
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <select id="cryptoSelect" class="bg-white/10 border border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-400">
+                    <option value="">Select Crypto</option>
+                    <option value="bitcoin">Bitcoin (BTC)</option>
+                    <option value="ethereum">Ethereum (ETH)</option>
+                    <option value="binancecoin">BNB</option>
+                    <option value="solana">Solana (SOL)</option>
+                    <option value="cardano">Cardano (ADA)</option>
+                    <option value="ripple">XRP</option>
+                    <option value="polkadot">Polkadot (DOT)</option>
+                    <option value="dogecoin">Dogecoin (DOGE)</option>
+                    <option value="avalanche-2">Avalanche (AVAX)</option>
+                    <option value="matic-network">Polygon (MATIC)</option>
+                </select>
+                <input type="number" id="amountInput" placeholder="Amount" step="0.0001" min="0" 
+                       class="bg-white/10 border border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-400">
+                <input type="number" id="buyPriceInput" placeholder="Buy Price (optional)" step="0.01" min="0"
+                       class="bg-white/10 border border-white/20 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-400">
+                <button onclick="addCrypto()" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-lg px-6 py-2 font-semibold transition-all transform hover:scale-105">
+                    Add to Portfolio
+                </button>
+            </div>
+        </div>
+
+        <!-- Portfolio Table -->
+        <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+            <h2 class="text-xl font-semibold mb-4 flex items-center justify-between">
+                <span>
+                    <i class="fas fa-wallet mr-2 text-purple-400"></i>
+                    My Portfolio
+                </span>
+                <button onclick="refreshPrices()" class="text-sm bg-white/10 hover:bg-white/20 px-3 py-1 rounded-lg transition-colors">
+                    <i class="fas fa-sync-alt mr-1"></i> Refresh Prices
+                </button>
+            </h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-white/20">
+                            <th class="text-left py-3 px-4">Asset</th>
+                            <th class="text-left py-3 px-4">Amount</th>
+                            <th class="text-left py-3 px-4">Current Price</th>
+                            <th class="text-left py-3 px-4">24h Change</th>
+                            <th class="text-left py-3 px-4">Value</th>
+                            <th class="text-left py-3 px-4">P/L</th>
+                            <th class="text-left py-3 px-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="portfolioTable">
+                        <tr>
+                            <td colspan="7" class="text-center py-8 text-gray-400">
+                                No assets in portfolio. Add some cryptocurrencies to get started!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Market Overview -->
+        <div class="mt-8 bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-chart-bar mr-2 text-purple-400"></i>
+                Market Overview
+            </h2>
+            <div id="marketOverview" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Market data will be inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 py-6 text-center text-gray-400 text-sm">
+        <p>Built with <i class="fas fa-heart text-pink-400"></i> by DRIPS</p>
+        <p class="mt-2">Data provided by CoinGecko API</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
